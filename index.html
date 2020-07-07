@@ -4,6 +4,7 @@
 <script type="text/javascript">
 function populateGroups(groupsJSON) {
 	const obj = JSON.parse(groupsJSON)
+	console.log(obj.response.length)
 	obj.response.forEach(group => console.log(group.id))
 }
 

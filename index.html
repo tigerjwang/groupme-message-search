@@ -29,19 +29,20 @@ async function getGroups(token) {
 
 <h1>INDEV GroupMe Message Search Tool</h1>
 
-<div>Access Token: </div>
-
+<label for="token">Access Token: </label>
 <input type="text" id="token">
 
 <button type="button"
 onclick="getGroups(document.getElementById('token').value);">
 Get groups</button>
 
-<label for="group-select">Choose a group:</label>
-
+<label for="group-select">Choose a group: </label>
 <select id="group-select">
 	<option value=""><i>Not Selected</i></option>
 </select>
+
+<label for="search">Search: </label>
+<input type="text" id="search">
 
 </body>
 </html> 

@@ -2,9 +2,14 @@
 <html>
 <head>
 <script type="text/javascript">
+
 function populateGroups(obj) {
-	console.log(obj.response.length);
-	obj.response.forEach(group => console.log(group.id));
+	obj.response.forEach((group) => {
+		var opt = document.createElement("option");
+		opt.value = group.id;
+		opt.innerHTML = group.name + "; " + group.id
+		document.getElementById('group-select').appendChild(opt);
+	});
 }
 
 async function getGroups(token) {
@@ -32,7 +37,11 @@ async function getGroups(token) {
 onclick="getGroups(document.getElementById('token').value);">
 Get groups</button>
 
-<p id="demo"></p>
+<label for="group-select">Choose a group:</label>
+
+<select id="group-select">
+	<option value=""><i>Not Selected</i></option>
+</select>
 
 </body>
 </html> 

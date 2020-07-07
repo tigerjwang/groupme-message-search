@@ -2,6 +2,11 @@
 <html>
 <head>
 <script type="text/javascript">
+function populateGroups(groupsJSON) {
+	const obj = JSON.parse(groupsJSON)
+	obj.response.forEach(group => console.log(group.id))
+}
+
 async function getGroups(token) {
 	console.log('Getting user groups...')
 	const response = await fetch('https://api.groupme.com/v3/groups?token='+token, {
@@ -11,7 +16,7 @@ async function getGroups(token) {
 	    }
 	  });
 	const myJson = await response.json();
-	document.write(JSON.stringify(myJson))
+	populateGroups(myJson)
 }
 </script>
 </head>

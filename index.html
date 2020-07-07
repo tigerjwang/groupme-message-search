@@ -3,13 +3,13 @@
 <head>
 <script type="text/javascript">
 function populateGroups(groupsJSON) {
-	const obj = JSON.parse(groupsJSON)
-	console.log(obj.response.length)
-	obj.response.forEach(group => console.log(group.id))
+	const obj = JSON.parse(groupsJSON);
+	console.log(obj.response.length);
+	obj.response.forEach(group => console.log(group.id));
 }
 
 async function getGroups(token) {
-	console.log('Getting user groups...')
+	console.log('Getting user groups...');
 	const response = await fetch('https://api.groupme.com/v3/groups?token='+token, {
 	    method: 'GET',
 	    headers: {
@@ -17,7 +17,7 @@ async function getGroups(token) {
 	    }
 	  });
 	const myJson = await response.json();
-	populateGroups(myJson)
+	populateGroups(myJson);
 }
 </script>
 </head>

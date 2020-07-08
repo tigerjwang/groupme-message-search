@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="main.css" rel="stylesheet">
 <script type="text/javascript">
 var messages = [];
 
@@ -102,27 +103,69 @@ async function getConversations(search_term) {
 </head>
 <body>
 
-<h1>(INDEV) GroupMe Message Search Tool</h1>
+	<div id="main">
+		<div id="header">
+			<h1>(INDEV) GroupMe Message Search Tool</h1>
+			<label for="token">Access Token: </label>
+			<input type="text" id="token">
 
-<label for="token">Access Token: </label>
-<input type="text" id="token">
+			<button type="button"
+			onclick="getGroups(document.getElementById('token').value);">
+			Get groups</button>
 
-<button type="button"
-onclick="getGroups(document.getElementById('token').value);">
-Get groups</button>
+			<label for="group-select">Choose a group: </label>
+			<select id="group-select">
+				<option value=""><i>Not Selected</i></option>
+			</select>
 
-<label for="group-select">Choose a group: </label>
-<select id="group-select">
-	<option value=""><i>Not Selected</i></option>
-</select>
+			<label for="search">Search: </label>
+			<input type="text" id="search">
 
-<label for="search">Search: </label>
-<input type="text" id="search">
+			<button type="button" onclick="getMessages(document.getElementById('token').value, document.getElementById('group-select').value);">Get messages</button>
 
-<button type="button" onclick="getMessages(document.getElementById('token').value, document.getElementById('group-select').value);">Get messages</button>
+			<button type="button" onclick="getConversations(document.getElementById('search').value);">Search</button>
+		</div>
 
-<button type="button" onclick="getConversations(document.getElementById('search').value);">Search</button>
+		<div id="search-main">
+			<div id="preview-container">
+				<div class="conversation-preview" id="conversation-0">
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+				</div>
+				<div class="conversation-preview" id="conversation-1">
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+				</div>
+				<div class="conversation-preview" id="conversation-2">
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+				</div>
+				<div class="conversation-preview" id="conversation-3">
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+				</div>
+				<div class="conversation-preview" id="conversation-4">
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+					<div class="preview-message"><b>Tamar Geller</b>: EE meeting starting at 9 EST! Zoom link here: https://yale.zoom.us/j/3912884533</div>
+				</div>
+			</div>
+			<div id="message-viewer"></div>
+		</div>
 
-<div>Build #: 0.1.4</div>
+		<div id="footer">
+			<div>Build #: 0.1.5</div>
+		</div>
+
+	</div> 
 </body>
 </html> 

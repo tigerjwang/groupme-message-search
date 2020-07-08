@@ -37,7 +37,7 @@ async function getMessages(token, group_id) {
 	console.log('Getting user messages...');
 
 	var messages = [];
-	var before_id;
+	var before_id = '';
 	do {
 		url = 'https://api.groupme.com/v3/groups/' + group_id + '/messages?before_id=' + before_id + '&limit=100&token=' + token;
 		const response = await fetch(url, {

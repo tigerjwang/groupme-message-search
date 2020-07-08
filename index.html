@@ -8,7 +8,7 @@ function populateGroups(obj) {
 	obj.response.forEach((group) => {
 		var opt = document.createElement("option");
 		opt.value = group.id;
-		opt.innerHTML = group.name + "; " + group.id
+		opt.innerHTML = group.name + "; " + group.id;
 		document.getElementById('group-select').appendChild(opt);
 	});
 }
@@ -39,9 +39,9 @@ async function getMessages(token, group_id) {
 	console.log('Getting user messages...');
 
 	var before_id = '';
-	var status = 0
+	var status = 0;
 	do {
-		url = 'https://api.groupme.com/v3/groups/' + group_id + '/messages?before_id=' + before_id + '&limit=100&token=' + token;
+		var url = 'https://api.groupme.com/v3/groups/' + group_id + '/messages?before_id=' + before_id + '&limit=100&token=' + token;
 		const response = await fetch(url, {
 		    method: 'GET',
 		    headers: {
@@ -63,7 +63,7 @@ async function getMessages(token, group_id) {
 }
 
 async function getConversations(search_term) {
-	if messages.length == 0 {
+	if (messages.length == 0) {
 		await getMessages(document.getElementById('token').value, document.getElementById('group-select').value);
 	}
 
@@ -72,28 +72,28 @@ async function getConversations(search_term) {
 	var i;
 	var prev;
 	for (i = 0; i < messages.length; i++) {
-		message = messages[i]
+		var message = messages[i];
 		if (message.text.includes(search_term)) {
 			if (!prev) {
-				prev = i
+				prev = i;
 			}
 			if (i - prev <= 10) {
-				conversation.push(message)
+				conversation.push(message);
 			} else {
-				conversations.push(conversation)
-				conversation = []
-				conversation.push(message)
+				conversations.push(conversation);
+				conversation = [];
+				conversation.push(message);
 			}
-			prev = i
+			prev = i;
 		}
 	}
 
 	conversations.forEach((c) => {
-		console.log("NEW CONVERSATION; Messages: ")
+		console.log("NEW CONVERSATION; Messages: ");
 		c.forEach((m) => {
-			console.log(m.text)
-		})
-	})
+			console.log(m.text);
+		});
+	});
 }
 </script>
 </head>

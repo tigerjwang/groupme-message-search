@@ -2,6 +2,8 @@
 <html>
 <head>
 <script type="text/javascript">
+var messages = [];
+
 function populateGroups(obj) {
 	obj.response.forEach((group) => {
 		var opt = document.createElement("option");
@@ -36,7 +38,6 @@ async function getMessages(token, group_id) {
 	}
 	console.log('Getting user messages...');
 
-	var messages = [];
 	var before_id = '';
 	var status = 0
 	do {
@@ -59,6 +60,40 @@ async function getMessages(token, group_id) {
 	
 	console.log('getMessages done: size ' + messages.length);
 	console.log(messages[0]);
+}
+
+async function getConversations(search_term) {
+	if messages.length == 0 {
+		await getMessages(document.getElementById('token').value, document.getElementById('group-select').value);
+	}
+
+	var conversations = [];
+	var conversation = [];
+	var i;
+	var prev;
+	for (i = 0; i < messages.length; i++) {
+		message = messages[i]
+		if (message.text.includes(search_term)) {
+			if (!prev) {
+				prev = i
+			}
+			if (i - prev <= 10) {
+				conversation.push(message)
+			} else {
+				conversations.push(conversation)
+				conversation = []
+				conversation.push(message)
+			}
+			prev = i
+		}
+	}
+
+	conversations.forEach((c) => {
+		console.log("NEW CONVERSATION; Messages: ")
+		c.forEach((m) => {
+			console.log(m.text)
+		})
+	})
 }
 </script>
 </head>
@@ -83,6 +118,8 @@ Get groups</button>
 
 <button type="button" onclick="getMessages(document.getElementById('token').value, document.getElementById('group-select').value);">Get messages</button>
 
-<div>Build #: 0.1.1</div>
+<button type="button" onclick="getConversations(document.getElementById('search').value);">Search</button>
+
+<div>Build #: 0.1.2</div>
 </body>
 </html> 

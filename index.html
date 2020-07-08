@@ -73,6 +73,9 @@ async function getConversations(search_term) {
 	var prev;
 	for (i = 0; i < messages.length; i++) {
 		var message = messages[i];
+		if (!message.text) { // skip if no text
+			continue;
+		}
 		if (message.text.includes(search_term)) {
 			if (!prev) {
 				prev = i;
@@ -120,6 +123,6 @@ Get groups</button>
 
 <button type="button" onclick="getConversations(document.getElementById('search').value);">Search</button>
 
-<div>Build #: 0.1.3</div>
+<div>Build #: 0.1.4</div>
 </body>
 </html> 

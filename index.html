@@ -2,7 +2,6 @@
 <html>
 <head>
 <script type="text/javascript">
-
 function populateGroups(obj) {
 	obj.response.forEach((group) => {
 		var opt = document.createElement("option");
@@ -13,7 +12,11 @@ function populateGroups(obj) {
 }
 
 async function getGroups(token) {
+	if (token && token=="") {
+		// Error handling
+	}
 	console.log('Getting user groups...');
+
 	const response = await fetch('https://api.groupme.com/v3/groups?token='+token, {
 	    method: 'GET',
 	    headers: {
@@ -23,11 +26,40 @@ async function getGroups(token) {
 	const myJson = await response.json();
 	populateGroups(myJson);
 }
+
+async function getMessages(token, group_id) {
+	if (!token || token=="") {
+		// Error handling
+	}
+	if (!group_id) {
+		// Error handling
+	}
+	console.log('Getting user messages...');
+
+	var messages = [];
+	var before_id;
+	do {
+		url = 'https://api.groupme.com/v3/groups/' + group_id + '/messages?before_id=' + before_id + '&limit=100&token=' + token;
+		const response = await fetch('https://api.groupme.com/v3/groups?token='+token, {
+		    method: 'GET',
+		    headers: {
+		      'Content-Type': 'application/json'
+		    }
+	  	});
+	  	const batch = await response.json();
+	  	messages = messages.concat(batch.response.messages)
+	  	before_id = messages[messages.length-1].id
+	  	console.log('Completed fetching' + messages.length + '/' + batch.response.count + ' messages...')
+	} while (response.status != 304); // Code 304 signals end of message stream
+	
+	console.log('getMessages done: size ' + messages.length)
+	console.log(messages[0])
+}
 </script>
 </head>
 <body>
 
-<h1>INDEV GroupMe Message Search Tool</h1>
+<h1>(INDEV) GroupMe Message Search Tool</h1>
 
 <label for="token">Access Token: </label>
 <input type="text" id="token">
@@ -43,6 +75,8 @@ Get groups</button>
 
 <label for="search">Search: </label>
 <input type="text" id="search">
+
+<button type="button" onclick="getMessages(document.getElementById('token').value, document.getElementById('group-select').value);">Get messages</button>
 
 </body>
 </html> 

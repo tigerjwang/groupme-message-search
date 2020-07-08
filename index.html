@@ -47,7 +47,10 @@ async function getMessages(token, group_id) {
 		      'Content-Type': 'application/json'
 		    }
 	  	});
-	  	status = response.status
+	  	status = response.status;
+	  	if (status == 304) {
+	  		break;
+	  	}
 	  	const batch = await response.json();
 	  	messages = messages.concat(batch.response.messages);
 	  	before_id = messages[messages.length-1].id;
@@ -80,5 +83,6 @@ Get groups</button>
 
 <button type="button" onclick="getMessages(document.getElementById('token').value, document.getElementById('group-select').value);">Get messages</button>
 
+<div>Build #: 0.1.1</div>
 </body>
 </html> 

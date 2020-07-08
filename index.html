@@ -38,6 +38,7 @@ async function getMessages(token, group_id) {
 
 	var messages = [];
 	var before_id = '';
+	var status = 0
 	do {
 		url = 'https://api.groupme.com/v3/groups/' + group_id + '/messages?before_id=' + before_id + '&limit=100&token=' + token;
 		const response = await fetch(url, {
@@ -46,11 +47,12 @@ async function getMessages(token, group_id) {
 		      'Content-Type': 'application/json'
 		    }
 	  	});
+	  	status = response.status
 	  	const batch = await response.json();
 	  	messages = messages.concat(batch.response.messages);
 	  	before_id = messages[messages.length-1].id;
 	  	console.log('Completed fetching' + messages.length + '/' + batch.response.count + ' messages...');
-	} while (response.status != 304); // Code 304 signals end of message stream
+	} while (status != 304); // Code 304 signals end of message stream
 	
 	console.log('getMessages done: size ' + messages.length);
 	console.log(messages[0]);

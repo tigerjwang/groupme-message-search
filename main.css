@@ -1,6 +1,7 @@
 html,
 body {
 	height: 100%;
+	overflow: hidden;
 }
 
 #main {
@@ -27,17 +28,173 @@ body {
 	display: flex;
 	flex-direction: column;
 	flex: 1 200px;
-	background-color: cyan;
+	background-color: #525252;
 	overflow-y: auto;
+}
+
+.preview {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+	background-color: black;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px #363636;
+	transition: transform .2s;
+}
+
+.preview:hover {
+	transform: scale(1.01);
+}
+
+.preview:active {
+	transform: scale(0.99);
+	box-shadow: 2px 2px 2px #363636;
+}
+
+.preview-message {
+	display: flex;
+	margin: 7px;
+}
+
+.preview-right-section {
+	margin-left: 5px;
+	flex: 1;
+	user-select: none;
+}
+
+.preview-profile-pic {
+	background-color: white;
+	flex: 0 30px;
+	min-width: 30px;
+	height: 30px;
+}
+
+.preview-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.preview-profile-pic {
+	border-radius: 50%;
+}
+
+.preview-profile-name {
+	font-family: 'Roboto', sans-serif;
+	font-size: 10px;
+	color: gainsboro;
+	letter-spacing: 1.5px;
+}
+
+.preview-message-date {
+	font-family: 'Roboto', sans-serif;
+	font-size: 10px;
+	color: gainsboro;
+	letter-spacing: 1.5px;
+}
+
+.preview-message-text {
+	background-color: dimgray;
+	padding: 5px;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	letter-spacing: 0.5px;
+	border-radius: 5px;
+	word-break: break-word;
 }
 
 #message-viewer {
 	flex: 3 200px;
-	background-color: black;
+	background-color: ghostwhite;
+	padding: 10px;
+	max-height: none;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
 }
 
 .conversation-preview {
 	margin: 10px;
 	padding: 10px;
 	border: 1px solid black;;
+}
+
+.message-container {
+	border: 1px solid black;
+	display: flex;
+}
+
+.left-container {
+	display: flex;
+	padding: 10px;
+}
+
+.right-container {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.message-box {
+	padding: 10px;
+	background-color: #e6e6e6;
+	border-radius: 15px;
+}
+
+.attachment-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.attachment-image {
+	background-color: gray;
+	height: 100px;
+	width: 100px;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.profile-photo {
+	background-color: blue;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	margin-right: -10px;
+}
+
+.message-text {
+
+}
+
+.time-stamp {
+	margin-top: 5px;
+	color: dimgray;
+	font: caption;
+	font-size: smaller;
+}
+
+/* PROGRESS BAR MODAL https://www.w3schools.com/howto/howto_js_progressbar.asp */
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
 }
